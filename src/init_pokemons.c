@@ -55,6 +55,7 @@ poke_t *init_pokemons(void)
             &pv, &atq, &def, &spd) == 5) {
                 pokemons[i].name = strdup(buffer_name);
                 pokemons[i].pv = pv;
+                pokemons[i].pv_max = pv;
                 pokemons[i].atq = atq;
                 pokemons[i].def = def;
                 pokemons[i].spd = spd;

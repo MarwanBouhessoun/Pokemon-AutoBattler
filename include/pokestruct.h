@@ -15,6 +15,7 @@ typedef struct poke_s {
     int atq;
     int def;
     int spd;
+    int pv_max;
 }poke_t;
 
 #endif

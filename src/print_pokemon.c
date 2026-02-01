@@ -53,6 +53,8 @@ static void print_per_gen(int generation, poke_t *pokemons)
         case 9:
             print_pokemon_gen(905, 1025, pokemons);
             break;
+        default:
+            print_pokemon_gen(0, 1025, pokemons);
     }
 }
 
@@ -62,10 +64,6 @@ void print_pokemon(int ac, char **av)
     int generation = get_generation(ac, av);
 
     printf("See all actual pokemon :\n\n");
-    if (generation == 0)
-        for (int i = 0; pokemons[i].name != NULL; i++)
-            printf("%s\n", pokemons[i].name);
-    else
-        print_per_gen(generation, pokemons);
+    print_per_gen(generation, pokemons);
     free_pokemons(pokemons);
 }

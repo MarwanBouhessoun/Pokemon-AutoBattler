@@ -21,6 +21,18 @@ static int len_array(poke_t *pokemons)
     return i;
 }
 
+static void print_health_bar(char *name, int pv_curr, int pv_max)
+{
+    float percent = (float)pv_curr / pv_max;
+    int bar_lenght = 20;
+    int completed_lenght = percent * bar_lenght;
+
+    printf("%s -> [", name);
+    for (int i = 0; i < bar_lenght; i++)
+        printf((i < completed_lenght) ? "#" : " ");
+    printf("] %d/%d PV\n", pv_curr, pv_max);
+}
+
 static poke_t found_poke_used(poke_t *pokemons, char *poke_user)
 {
     char *poke = get_name_lower(poke_user);
@@ -60,6 +72,7 @@ static void attack(poke_t *attacker, poke_t *defender)
         defender->pv = 0;
     printf("%s deals %d damage to %s! (%d HP left)\n",
         attacker->name, total_damage, defender->name, defender->pv);
+    print_health_bar(defender->name, defender->pv, defender->pv_max);
     sleep(1);
 }
 
