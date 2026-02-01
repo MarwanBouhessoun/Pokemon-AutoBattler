@@ -54,6 +54,7 @@ static void attack(poke_t *attacker, poke_t *defender)
     int rand_var = (rand() % 6) - 2;
     int miss = rand() % 100;
     int crit = rand() % 5;
+    float multiple = get_type_affinity(attacker->type, defender->type);
 
     if (miss < 10) {
         printf("%s attacks but... MISSED!!\n", attacker->name);
@@ -65,11 +66,15 @@ static void attack(poke_t *attacker, poke_t *defender)
         printf("CRITICAL HIT on %s!\n", defender->name);
         total_damage *= 2;
     }
+    total_damage *= multiple;
     if (total_damage < 1)
         total_damage = 1;
     defender->pv -= total_damage;
     if (defender->pv < 0)
         defender->pv = 0;
+    printf((multiple == 0) ? "It has no effect...\n" : "");
+    printf((multiple == 2) ? "Its very effective !!\n" : "");
+    printf((multiple == 0.5) ? "Its not very effective...\n" : " \b");
     printf("%s deals %d damage to %s! (%d HP left)\n",
         attacker->name, total_damage, defender->name, defender->pv);
     print_health_bar(defender->name, defender->pv, defender->pv_max);

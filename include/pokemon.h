@@ -15,4 +15,5 @@ poke_t *init_pokemons(void);
 void poke_battle(poke_t *pokemons, char *poke_user);
 char *get_name_lower(char *name);
 void free_pokemons(poke_t *pokemons);
+float get_type_affinity(char *atk_type, char *def_type);
 #endif

@@ -38,6 +38,7 @@ poke_t *init_pokemons(void)
     FILE *fd = fopen(filename, "r");
     char buffer[256];
     char buffer_name[256];
+    char buffer_type[256];
     int pv, atq, def, spd;
     int i = 0;
 
@@ -51,14 +52,15 @@ poke_t *init_pokemons(void)
     }
     while (fgets(buffer, sizeof(buffer), fd)) {
         buffer[strcspn(buffer, "\n")] = 0;
-        if (sscanf(buffer, "%[^;];%d;%d;%d;%d", buffer_name,
-            &pv, &atq, &def, &spd) == 5) {
+        if (sscanf(buffer, "%[^;];%d;%d;%d;%d;%s", buffer_name,
+            &pv, &atq, &def, &spd, buffer_type) == 6) {
                 pokemons[i].name = strdup(buffer_name);
                 pokemons[i].pv = pv;
                 pokemons[i].pv_max = pv;
                 pokemons[i].atq = atq;
                 pokemons[i].def = def;
                 pokemons[i].spd = spd;
+                pokemons[i].type = strdup(buffer_type);
                 i++;
         }
     }

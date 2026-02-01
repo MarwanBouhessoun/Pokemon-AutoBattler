@@ -10,6 +10,7 @@ SRC_FILES	=	main.c				\
 				check_pokemon.c 	\
 				init_pokemons.c 	\
 				poke_battle.c 	 	\
+				get_type_affinity.c \
 				free_pokemons.c 	\
 
 SRC			=	$(addprefix src/, $(SRC_FILES))
